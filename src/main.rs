@@ -50,13 +50,16 @@ fn main() {
     let mut count: i64 = 0;
 
     let now = Instant::now();
-    for line in &points {
-        for other_line in &points {
+
+    let mut i: usize = 0;
+    for line in points.iter() {
+        for other_line in points.iter().skip(i + 1) {
             let b = intersect(&line[0], &line[1], &other_line[0], &other_line[1]);
             if b {
                 count += 1
             }
         }
+        i += 1;
     }
     let elapsed = now.elapsed();
 
