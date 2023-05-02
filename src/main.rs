@@ -66,3 +66,63 @@ fn main() {
     println!("intersecting lines: {}", count);
     println!("elapsed time: {:.4?}", elapsed);
 }
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    fn assert_intersect(first: (f64, f64, f64, f64), second: (f64, f64, f64, f64), expected: bool) {
+        let p1 = Point {
+            x: first.0,
+            y: first.1,
+        };
+        let p2 = Point {
+            x: first.2,
+            y: first.3,
+        };
+        let q1 = Point {
+            x: second.0,
+            y: second.1,
+        };
+        let q2 = Point {
+            x: second.2,
+            y: second.3,
+        };
+        assert_eq!(intersect(&p1, &p2, &q1, &q2), expected);
+    }
+
+    #[test]
+    fn test_colinear() {
+        assert_intersect((0.0, 0.0, 0.0, 1.0), (1.0, 0.0, 1.0, 1.0), false);
+    }
+
+    #[test]
+    fn test_basic_cross() {
+        assert_intersect((1.0, 0.0, 1.0, 2.0), (0.0, 1.0, 2.0, 1.0), true);
+    }
+
+    #[test]
+    fn test_sideways_t() {
+        assert_intersect((0.0, 0.0, 0.0, 2.0), (0.0, 1.0, 2.0, 1.0), true);
+    }
+
+    #[test]
+    fn test_right_angle() {
+        assert_intersect((0.0, 0.0, 0.0, 2.0), (0.0, 2.0, 2.0, 2.0), true);
+    }
+
+    #[test]
+    fn test_colinear_but_common_point() {
+        assert_intersect((0.0, 0.0, 1.0, 0.0), (1.0, 0.0, 2.0, 0.0), true);
+    }
+
+    #[test]
+    fn test_colinear_but_common_part() {
+        assert_intersect((0.0, 0.0, 2.0, 0.0), (1.0, 0.0, 3.0, 0.0), true);
+    }
+
+    #[test]
+    fn test_colinear_and_apart() {
+        assert_intersect((0.0, 0.0, 1.0, 0.0), (2.0, 0.0, 3.0, 0.0), false);
+    }
+}
