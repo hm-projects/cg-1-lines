@@ -125,4 +125,9 @@ mod tests {
     fn test_colinear_and_apart() {
         assert_intersect((0.0, 0.0, 1.0, 0.0), (2.0, 0.0, 3.0, 0.0), false);
     }
+
+    #[test]
+    fn test_colinear_and_included() {
+        assert_intersect((0.0, 0.0, 3.0, 0.0), (1.0, 0.0, 2.0, 0.0), false);
+    }
 }
