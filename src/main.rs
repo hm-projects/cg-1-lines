@@ -128,6 +128,6 @@ mod tests {
 
     #[test]
     fn test_colinear_and_included() {
-        assert_intersect((0.0, 0.0, 3.0, 0.0), (1.0, 0.0, 2.0, 0.0), false);
+        assert_intersect((0.0, 0.0, 3.0, 0.0), (1.0, 0.0, 2.0, 0.0), true);
     }
 }
