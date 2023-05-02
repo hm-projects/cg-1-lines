@@ -122,8 +122,18 @@ mod tests {
     }
 
     #[test]
+    fn test_colinear_but_common_part_and_angled() {
+        assert_intersect((0.0, 0.0, 1.0, 1.0), (0.5, 0.5, 1.5, 1.5), true);
+    }
+
+    #[test]
     fn test_colinear_and_apart() {
         assert_intersect((0.0, 0.0, 1.0, 0.0), (2.0, 0.0, 3.0, 0.0), false);
+    }
+
+    #[test]
+    fn test_colinear_apart_and_angled() {
+        assert_intersect((0.0, 0.0, 0.5, 0.5), (1.0, 1.0, 1.5, 1.5), false);
     }
 
     #[test]
