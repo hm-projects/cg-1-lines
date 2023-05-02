@@ -7,13 +7,41 @@ fn ccw(p: &Point, q: &Point, r: &Point) -> f64 {
     return (p.x * q.y - p.y * q.x) + (q.x * r.y - q.y * r.x) + (p.y * r.x - p.x * r.y);
 }
 
+fn overlap_for_colinear(p1: &Point, p2: &Point, q1: &Point, q2: &Point) -> bool {
+    // x
+    let q1x_in_px = q1.x >= p1.x.min(p2.x) && q1.x <= p1.x.max(p2.x);
+    let q2x_in_px = q2.x >= p2.x.min(p2.x) && q2.x <= p2.x.max(p2.x);
+
+    // y
+    let q1y_in_py = q1.y >= p1.y.min(p2.y) && q1.y <= p1.y.max(p2.y);
+    let q2y_in_py = q2.y >= p2.y.min(p2.y) && q2.y <= p2.y.max(p2.y);
+
+
+    if (q1x_in_px || q2x_in_px) && (q1y_in_py || q2y_in_py) {
+        return true
+    }
+
+    return false;
+}
+
 fn intersect(p1: &Point, p2: &Point, q1: &Point, q2: &Point) -> bool {
-    if ccw(p1, p2, q1) * ccw(p1, p2, q2) > 0.0 {
+    let ccwq1 = ccw(p1, p2, q1);
+    let ccwq2 = ccw(p1, p2, q2);
+    if ccwq1 * ccwq2 > 0.0 {
         return false;
     }
-    if ccw(q1, q2, p1) * ccw(q1, q2, p2) > 0.0 {
+
+    let ccwp1 = ccw(q1, q2, p1);
+    let ccwp2 = ccw(q1, q2, p2);
+    if ccwp1 * ccwp2 > 0.0 {
         return false;
     }
+
+    if ccwq1 == 0.0 && ccwq2 == 0.0 && ccwp1 == 0.0 && ccwp2 == 0.0 {
+        // lines are colinear --> check for overlap
+        return overlap_for_colinear(p1, p2, q1, q2);
+    }
+
     return true;
 }
 
