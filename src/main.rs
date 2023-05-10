@@ -100,7 +100,6 @@ fn main() {
     // read csv file
     let s = fs::read_to_string(path).expect("cannot read file");
 
-    println!(">>>>>>Normal<<<<<<");
     run(&s, intersect);
 }
 
