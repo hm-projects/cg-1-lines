@@ -50,10 +50,10 @@ fn intersect(p1: &Point, p2: &Point, q1: &Point, q2: &Point) -> bool {
 }
 
 use std::env;
+use std::fs;
 use std::time::Instant;
-use std::{fs, vec};
 
-fn run(s: &String, intersection_test: fn(&Point, &Point, &Point, &Point) -> bool) {
+fn run(s: &String) {
     let points: Vec<(Point, Point)> = s
         .lines()
         .into_iter()
@@ -80,7 +80,7 @@ fn run(s: &String, intersection_test: fn(&Point, &Point, &Point, &Point) -> bool
     let mut i: usize = 0;
     for line in points.iter() {
         for other_line in points.iter().skip(i + 1) {
-            let b = intersection_test(&line.0, &line.1, &other_line.0, &other_line.1);
+            let b = intersect(&line.0, &line.1, &other_line.0, &other_line.1);
             if b {
                 count += 1
             }
@@ -100,7 +100,7 @@ fn main() {
     // read csv file
     let s = fs::read_to_string(path).expect("cannot read file");
 
-    run(&s, intersect);
+    run(&s);
 }
 
 #[cfg(test)]
