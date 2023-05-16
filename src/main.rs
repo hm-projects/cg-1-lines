@@ -9,23 +9,25 @@ fn ccw(p: &Point, q: &Point, r: &Point) -> f64 {
 
 fn overlap_for_colinear(p1: &Point, p2: &Point, q1: &Point, q2: &Point) -> bool {
     // x
-    let q1x_in_px = q1.x >= p1.x.min(p2.x) && q1.x <= p1.x.max(p2.x);
-    let q2x_in_px = q2.x >= p2.x.min(p2.x) && q2.x <= p2.x.max(p2.x);
+    let p_smallest_x = p1.x.min(p2.x);
+    let p_largest_x = p1.x.max(p2.x);
+    let q_smallest_x = q1.x.min(q2.x);
 
-    let x_test = q1x_in_px || q2x_in_px;
+    let qx_in_px = q_smallest_x >= p_smallest_x && q_smallest_x <= p_largest_x;
 
-    if !x_test {
+    if !qx_in_px {
         // early return
         return false;
     }
 
     // y
-    let q1y_in_py = q1.y >= p1.y.min(p2.y) && q1.y <= p1.y.max(p2.y);
-    let q2y_in_py = q2.y >= p2.y.min(p2.y) && q2.y <= p2.y.max(p2.y);
+    let p_smallest_y = p1.y.min(p2.y);
+    let p_largest_y = p1.y.max(p2.y);
+    let q_smallest_y = q1.y.min(q2.y);
 
-    let y_test = q1y_in_py || q2y_in_py;
+    let qy_in_py = q_smallest_y >= p_smallest_y && q_smallest_y <= p_largest_y;
 
-    x_test && y_test
+    return qy_in_py;
 }
 
 fn intersect(p1: &Point, p2: &Point, q1: &Point, q2: &Point) -> bool {
@@ -165,6 +167,11 @@ mod tests {
     #[test]
     fn test_colinear_but_common_part() {
         assert_intersect((0.0, 0.0, 2.0, 0.0), (1.0, 0.0, 3.0, 0.0), true);
+    }
+
+    #[test]
+    fn test_colinear_but_common_part_swapped() {
+        assert_intersect((0.0, 0.0, 2.0, 0.0), (3.0, 0.0, 1.0, 0.0), true);
     }
 
     #[test]
