@@ -54,7 +54,7 @@ use std::time::Instant;
 use std::{fs, vec};
 
 fn run(s: &String, intersection_test: fn(&Point, &Point, &Point, &Point) -> bool) {
-    let points: Vec<Vec<Point>> = s
+    let points: Vec<(Point, Point)> = s
         .lines()
         .into_iter()
         .map(|l| {
@@ -69,7 +69,7 @@ fn run(s: &String, intersection_test: fn(&Point, &Point, &Point, &Point) -> bool
                 y: splits[3].parse().expect("should be a number"),
             };
 
-            return vec![p1, p2];
+            return (p1, p2);
         })
         .collect();
 
@@ -80,7 +80,7 @@ fn run(s: &String, intersection_test: fn(&Point, &Point, &Point, &Point) -> bool
     let mut i: usize = 0;
     for line in points.iter() {
         for other_line in points.iter().skip(i + 1) {
-            let b = intersection_test(&line[0], &line[1], &other_line[0], &other_line[1]);
+            let b = intersection_test(&line.0, &line.1, &other_line.0, &other_line.1);
             if b {
                 count += 1
             }

@@ -16,6 +16,19 @@ Results and runtime:
 |s_10000_1.dat|733|~ 135 ms|
 |s_100000_1.dat|77138|~ 15 s|
 
+## Data structures
+
+### Point
+
+Our representation of a point in $\R^2$:
+
+```rs
+struct Point {
+    x: f64,
+    y: f64,
+}
+```
+
 ## Algorithm
 
 main loop:
@@ -35,4 +48,3 @@ overlap_for_collinear:
 ## Bounding Box Test Early Return
 
 (does not work as of now, because the overlap_for_colinear is strictly designed for colinear points)
-
