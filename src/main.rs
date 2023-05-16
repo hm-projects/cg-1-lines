@@ -95,14 +95,19 @@ fn run(s: &String) {
     println!("elapsed time: {:.4?}", elapsed);
 }
 
-fn main() {
-    let args: Vec<String> = env::args().collect();
-    let path = &args[1];
-
-    // read csv file
-    let s = fs::read_to_string(path).expect("cannot read file");
+fn process_file(filename: &String) {
+    println!("processing file: {}", filename);
+    let s = fs::read_to_string(filename).expect("cannot read file");
 
     run(&s);
+}
+
+fn main() {
+    let args: Vec<String> = env::args().collect();
+
+    for file in args.iter().skip(1) {
+        process_file(file)
+    }
 }
 
 #[cfg(test)]
