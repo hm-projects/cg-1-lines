@@ -13,8 +13,8 @@ Results and runtime:
 |Dataset|Amount of intersections|Runtime|
 |---|---|---|
 |s_1000_1.dat|11|~ 1 ms|
-|s_10000_1.dat|733|~ 135 ms|
-|s_100000_1.dat|77138|~ 15 s|
+|s_10000_1.dat|733|~ 90 ms|
+|s_100000_1.dat|77138|~ 9 s|
 
 ## Data structures
 
@@ -117,9 +117,11 @@ fn overlap_for_colinear(p1: &Point, p2: &Point, q1: &Point, q2: &Point) -> bool 
 
 ## Uniqueness of our solution
 
-We consider our edge case handling, the overlap check, as very simple.
+We consider our edge case handling, the overlap check, as very simple and elegant.
 
 ## Challenges
+
+We had most trouble with the overlap check and thinking about all the possible edge cases.
 
 ## Why is our solution correct?
 
