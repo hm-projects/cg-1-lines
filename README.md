@@ -20,7 +20,7 @@ Results and runtime:
 
 ### Point
 
-Our representation of a point in $\R^2$:
+Our representation of a point in $\mathbb{R}^2$:
 
 ```rs
 struct Point {
