@@ -131,7 +131,11 @@ mod tests {
             x: second.2,
             y: second.3,
         };
+        // assert all permutations as well
         assert_eq!(intersect(&p1, &p2, &q1, &q2), expected);
+        assert_eq!(intersect(&p1, &p2, &q2, &q1), expected);
+        assert_eq!(intersect(&p2, &p1, &q1, &q2), expected);
+        assert_eq!(intersect(&p2, &p1, &q2, &q1), expected);
     }
 
     #[test]
