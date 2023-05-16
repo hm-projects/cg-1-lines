@@ -1,4 +1,4 @@
-# Computational Geometry | Aufgabe 1 - Strecken
+# Computational Geometry | Assignment 1: Lines
 
 - Nicolas Bissig
 - Antonino Grasso
@@ -7,14 +7,16 @@
 
 Implementation: Rust
 
-Kurze Beschreibung: Prüfung Kolinear, wenn ja Overlapp
+Quick summary: We test with the $ccw$ if two lines intersect, and for the colinear edge case, we use a simple overlap check
 
-Ergebnisse: 
-    - 1000: 11 Schnittpunkte
-    - 10000: 733 Schnittpunkte
-    - 100000: 77138 Schnittpunkte
+Results and runtime:
+|Dataset|Amount of intersections|Runtime|
+|---|---|---|
+|s_1000_1.dat|11|~ 1 ms|
+|s_10000_1.dat|733|~ 135 ms|
+|s_100000_1.dat|77138|~ 15 s|
 
-## Algorithmus
+## Algorithm
 
 main loop:
 
@@ -24,11 +26,11 @@ ccw's:
 
 overlap_for_collinear:
 
-## Besonderheiten der Lösung
+## Uniqueness of our solution
 
 ## Challenges
 
-## Warum wir denken, dass das richtig ist
+## Why is our solution correct?
 
 ## Bounding Box Test Early Return
 
