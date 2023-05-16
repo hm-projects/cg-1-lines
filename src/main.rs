@@ -136,6 +136,29 @@ mod tests {
         assert_eq!(intersect(&p1, &p2, &q2, &q1), expected);
         assert_eq!(intersect(&p2, &p1, &q1, &q2), expected);
         assert_eq!(intersect(&p2, &p1, &q2, &q1), expected);
+
+        // swap x and y coordinates
+        let p1 = Point {
+            x: first.1,
+            y: first.0,
+        };
+        let p2 = Point {
+            x: first.3,
+            y: first.2,
+        };
+        let q1 = Point {
+            x: second.1,
+            y: second.0,
+        };
+        let q2 = Point {
+            x: second.3,
+            y: second.2,
+        };
+        // assert all permutations as well
+        assert_eq!(intersect(&p1, &p2, &q1, &q2), expected);
+        assert_eq!(intersect(&p1, &p2, &q2, &q1), expected);
+        assert_eq!(intersect(&p2, &p1, &q1, &q2), expected);
+        assert_eq!(intersect(&p2, &p1, &q2, &q1), expected);
     }
 
     #[test]
