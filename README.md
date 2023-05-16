@@ -35,21 +35,21 @@ The main loop expects a vector of point pairs, that represent a line.
 Every line is checked for intersection with every other line, except for itself, and all pairs that already have been tested.
 
 ```rs
-    let mut count: i64 = 0;
-    let now = Instant::now();
-    let mut i: usize = 0;
-    for line in points.iter() {
-        for other_line in points.iter().skip(i + 1) {
-            let b = intersect(&line.0, &line.1, &other_line.0, &other_line.1);
-            if b {
-                count += 1
-            }
+let mut count: i64 = 0;
+let now = Instant::now();
+let mut i: usize = 0;
+for line in points.iter() {
+    for other_line in points.iter().skip(i + 1) {
+        let b = intersect(&line.0, &line.1, &other_line.0, &other_line.1);
+        if b {
+            count += 1
         }
-        i += 1;
     }
-    let elapsed = now.elapsed();
-    println!("intersecting lines: {}", count);
-    println!("elapsed time: {:.4?}", elapsed);
+    i += 1;
+}
+let elapsed = now.elapsed();
+println!("intersecting lines: {}", count);
+println!("elapsed time: {:.4?}", elapsed);
 ```
 
 The `intersect` function accepts four points, that represent two lines, and checks if these two lines intersect.
