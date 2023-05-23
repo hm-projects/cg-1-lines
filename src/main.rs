@@ -12,10 +12,11 @@ fn overlap_for_colinear(p1: &Point, p2: &Point, q1: &Point, q2: &Point) -> bool 
     let p_smallest_x = p1.x.min(p2.x);
     let p_largest_x = p1.x.max(p2.x);
     let q_smallest_x = q1.x.min(q2.x);
+    let q_largest_x = q1.x.max(q2.x);
 
-    let qx_in_px = q_smallest_x >= p_smallest_x && q_smallest_x <= p_largest_x;
+    let qx_not_in_px = q_smallest_x > p_largest_x || q_largest_x < p_smallest_x;
 
-    if !qx_in_px {
+    if qx_not_in_px {
         // early return
         return false;
     }
@@ -24,13 +25,19 @@ fn overlap_for_colinear(p1: &Point, p2: &Point, q1: &Point, q2: &Point) -> bool 
     let p_smallest_y = p1.y.min(p2.y);
     let p_largest_y = p1.y.max(p2.y);
     let q_smallest_y = q1.y.min(q2.y);
+    let q_largest_y = q1.y.max(q2.y);
 
-    let qy_in_py = q_smallest_y >= p_smallest_y && q_smallest_y <= p_largest_y;
+    let qy_not_in_py = q_smallest_y > p_largest_y || q_largest_y < p_smallest_y;
 
-    return qy_in_py;
+    return !qy_not_in_py;
 }
 
 fn intersect(p1: &Point, p2: &Point, q1: &Point, q2: &Point) -> bool {
+    // let overlap = overlap_for_colinear(p1, p2, q1, q2);
+    // if !overlap {
+    //     return false;
+    // }
+
     let ccwq1 = ccw(p1, p2, q1);
     let ccwq2 = ccw(p1, p2, q2);
     if ccwq1 * ccwq2 > 0.0 {
