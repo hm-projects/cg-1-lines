@@ -125,6 +125,8 @@ We had most trouble with the overlap check and thinking about all the possible e
 
 ## Why is our solution correct?
 
+Besides that edge case handling was solved simple and elegant not facilitating nasty bugs or oversights, we have extensive test cases covering simple, complex and special cases
+
 ## Bounding Box Test Early Return
 
 A thought when implementing `overlap_for_colinear` was that it can be used for early return in `intersect`. Given that two lines do not overlap when projected onto the axis, they cannot intersect either.
