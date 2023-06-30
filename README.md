@@ -127,4 +127,23 @@ We had most trouble with the overlap check and thinking about all the possible e
 
 ## Bounding Box Test Early Return
 
-(does not work as of now, because the overlap_for_colinear is strictly designed for colinear points)
+A thought when implementing `overlap_for_colinear` was that it can be used for early return in `intersect`. Given that two lines do not overlap when projected onto the axis, they cannot intersect either.
+
+Therefore suggesting the following change as initial bounding box test in `intersect` as preliminary check for intersection:
+
+```rs
+let overlap = overlap_for_colinear(p1, p2, q1, q2);
+     if !overlap {
+         return false;
+     }
+```
+
+Given that change, results remained (expectedly) the same. However, we noticed that performance suffered from this change, as `overlap_for_colinear` is now calculated everytime. See table below for comparison:
+
+|Dataset|Runtime without early-return| Runtime with early-return| Ratio $\frac{r_{with}}{r_{without}}$|
+|---|---|---|---|---|
+|s_1000_1.dat|~ 8 ms|~ 12 ms| ~ 1.5 |
+|s_10000_1.dat|~ 800 ms| ~ 120 ms | ~ 1.5 |
+|s_100000_1.dat|~ 80 s| ~ 120 s| ~ 1.5 |
+
+Interestingly, as can be seen, ratios between with or without the early return change, stay constant at about ~1.5.
