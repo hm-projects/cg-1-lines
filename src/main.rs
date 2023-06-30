@@ -209,6 +209,11 @@ mod tests {
     }
 
     #[test]
+    fn test_parallel2() {
+        assert_intersect((2.0, 5.0, 5.0, 4.0), (3.0, 2.0, 6.0, 1.0), false);
+    }
+
+    #[test]
     fn test_colinear_but_common_part() {
         assert_intersect((0.0, 0.0, 2.0, 0.0), (1.0, 0.0, 3.0, 0.0), true);
     }
