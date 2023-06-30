@@ -125,7 +125,7 @@ We had most trouble with the overlap check and thinking about all the possible e
 
 ## Why is our solution correct?
 
-Besides that edge case handling was solved simple and elegant not facilitating nasty bugs or oversights, we have extensive test cases covering simple, complex and special cases
+Besides that edge case handling was solved simple and elegant not facilitating nasty bugs or oversights, we have extensive test cases covering simple, complex and special cases.
 
 ## Bounding Box Test Early Return
 
